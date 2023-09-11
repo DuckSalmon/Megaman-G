@@ -1,0 +1,194 @@
+[gd_scene load_steps=14 format=3 uid="uid://bq6mgekl3uhqd"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_7gfun"]
+[ext_resource type="Texture2D" uid="uid://b2r0mvkhsp544" path="res://assets/GFX/player/MegaMan.png" id="3_nj304"]
+[ext_resource type="AudioStream" uid="uid://c01p0j785a8yb" path="res://assets/AUDIO/SFX/MegamanDefeat.wav" id="3_qx3fe"]
+
+[sub_resource type="Animation" id="Animation_hpw50"]
+resource_name = "Idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_1g8eo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_b8uwb"]
+resource_name = "Tipping"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_jfgif"]
+resource_name = "jump"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
+[sub_resource type="Animation" id="Animation_w7ik5"]
+resource_name = "shoot_idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [12, 13, 12]
+}
+
+[sub_resource type="Animation" id="Animation_wm6rk"]
+resource_name = "shoot_jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [19]
+}
+
+[sub_resource type="Animation" id="Animation_osa1q"]
+resource_name = "shoot_walk"
+length = 0.48
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.36),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [15, 16, 17, 18]
+}
+
+[sub_resource type="Animation" id="Animation_xtd5c"]
+resource_name = "walk"
+length = 0.48
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.36),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5xxjd"]
+_data = {
+"Idle": SubResource("Animation_hpw50"),
+"RESET": SubResource("Animation_1g8eo"),
+"Tipping": SubResource("Animation_b8uwb"),
+"jump": SubResource("Animation_jfgif"),
+"shoot_idle": SubResource("Animation_w7ik5"),
+"shoot_jump": SubResource("Animation_wm6rk"),
+"shoot_walk": SubResource("Animation_osa1q"),
+"walk": SubResource("Animation_xtd5c")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4rnrp"]
+size = Vector2(12, 20)
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(64, 160)
+script = ExtResource("1_7gfun")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(16, 16)
+texture = ExtResource("3_nj304")
+hframes = 12
+vframes = 8
+region_rect = Rect2(-2, -2, 32, 32)
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_5xxjd")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 21)
+shape = SubResource("RectangleShape2D_4rnrp")
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Shootanimtimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="Shootpos" type="Marker2D" parent="."]
+position = Vector2(32, 19)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(16, 21)
+scale = Vector2(0.6, 1)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_qx3fe")
+volume_db = 1.0
+
+[connection signal="timeout" from="Shootanimtimer" to="." method="_on_shootanimtimer_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
