@@ -16,9 +16,12 @@ var walk_left := false
 var ismoving := false
 var is_launching_normal_attack := false
 var is_sliding := false
+var is_onair := false
 
 @onready var attacktimer = $Shootanimtimer
-
+@onready var landsfx = preload("res://assets/AUDIO/SFX/Landing.wav")
+@onready var defeatsfx = preload("res://assets/AUDIO/SFX/MegamanDefeat.wav")
+@onready var megabustersfx = preload("res://assets/AUDIO/SFX/MegaBuster.wav")
 
 func _ready():
 	pass
@@ -89,9 +92,11 @@ func _physics_process(delta):
 
 	# Jump
 	if Input.is_action_pressed("jump") and is_on_floor():
+		is_onair = true
 		velocity.y = -JUMP_SPEED
+		
 	
-	# Slide
+	# Slide2
 	if Input.is_action_pressed("jump") and Input.is_action_pressed("down"):
 		is_sliding = true
 		print("slide")
@@ -102,9 +107,19 @@ func _physics_process(delta):
 		attacktimer.start() #add timer to the flag, after this time animations turns in non attacking
 		if Global.projectile_max_number > 0:
 			shoot()
-#			pass
-	
-
+			%SFXplayer.stream = megabustersfx
+			%SFXplayer.play()
+			
+	if is_on_floor():
+		if is_onair == false:
+			%SFXplayer.stream = landsfx
+			%SFXplayer.play()
+			is_onair = true
+	else:
+		if is_onair == true:
+			is_onair = false
+			
+		
 func check_left_right_key_press_time(delta):
 	if not(walk_left or walk_right): #If not currently doing either one of these
 		left_right_key_press_time = 0
@@ -127,7 +142,8 @@ func _on_shootanimtimer_timeout():
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
-	$AudioStreamPlayer2D.play()
+	%SFXplayer.stream = defeatsfx
+	%SFXplayer.play()
 	print("ciao")
 	await get_tree().create_timer(2.0).timeout
 	get_tree().change_scene_to_file("res://1.tscn")

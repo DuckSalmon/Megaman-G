@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://e1ynfub15k2e"]
+[gd_scene load_steps=4 format=3 uid="uid://e1ynfub15k2e"]
 
 [ext_resource type="Script" path="res://mega_buster.gd" id="1_kljql"]
 [ext_resource type="Texture2D" uid="uid://cj0ls6o46thbk" path="res://assets/GFX/Projectile/MegaBusterProjectile.png" id="2_bi0x0"]
-[ext_resource type="AudioStream" uid="uid://ktxcy02x5562" path="res://assets/AUDIO/SFX/MegaBuster.wav" id="3_3lgw3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b4jq2"]
 size = Vector2(8, 8)
@@ -17,9 +16,5 @@ texture = ExtResource("2_bi0x0")
 shape = SubResource("RectangleShape2D_b4jq2")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_3lgw3")
-volume_db = 1.0
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
