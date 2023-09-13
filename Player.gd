@@ -2,13 +2,13 @@ extends CharacterBody2D
 
 @export var projectile = PackedScene
 @onready var BULLET = preload("res://MegaBuster.tscn")
+@onready var BUBBLE = preload("res://Bubble.tscn")
 
-var WALK_SPEED := 100.0
+var WALK_SPEED := 82.5
 var VELOCITY_X_DAMPING = 0.1
-var JUMP_SPEED = 360.0
-var GRAVITY_VEC := Vector2(0, 900.0)
-var MAX_FALL_SPEED = 360
-
+var JUMP_SPEED = 285.0
+var GRAVITY_VEC := Vector2(0, 1)
+var MAX_FALL_SPEED := 420.0
 var left_right_key_press_time: float = 0
 
 var walk_right := false
@@ -17,18 +17,21 @@ var ismoving := false
 var is_launching_normal_attack := false
 var is_sliding := false
 var is_onair := false
+var under_water := false
 
 @onready var attacktimer = $Shootanimtimer
 @onready var landsfx = preload("res://assets/AUDIO/SFX/Landing.wav")
 @onready var defeatsfx = preload("res://assets/AUDIO/SFX/MegamanDefeat.wav")
 @onready var megabustersfx = preload("res://assets/AUDIO/SFX/MegaBuster.wav")
+@onready var splashsfx = preload("res://assets/AUDIO/SFX/splash.wav")
 
 func _ready():
 	pass
 
 func _physics_process(delta):
-
 	Global.playerxy = self.position
+
+
 #Animations
 	
 	if is_launching_normal_attack == false:
@@ -50,14 +53,15 @@ func _physics_process(delta):
 		if not is_on_floor():
 			$Sprite/AnimationPlayer.play("shoot_jump")
 	
-#	
+#	#Physics
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += delta * GRAVITY_VEC
+		velocity.y = clamp(velocity.y + 15.0, -MAX_FALL_SPEED, MAX_FALL_SPEED)
 	
 	
 	if velocity.y > MAX_FALL_SPEED: #Limits fall speeds
 		velocity.y = MAX_FALL_SPEED
+	
 	
 	check_left_right_key_press_time(delta)
 	
@@ -90,11 +94,14 @@ func _physics_process(delta):
 	target_speed *= WALK_SPEED
 	velocity.x = target_speed 
 
+
 	# Jump
-	if Input.is_action_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		is_onair = true
-		velocity.y = -JUMP_SPEED
-		
+		velocity.y = -JUMP_SPEED * 1.0
+	
+	if Input.is_action_just_released("jump"):
+		velocity.y = 0
 	
 	# Slide2
 	if Input.is_action_pressed("jump") and Input.is_action_pressed("down"):
@@ -119,6 +126,7 @@ func _physics_process(delta):
 		if is_onair == true:
 			is_onair = false
 			
+			
 		
 func check_left_right_key_press_time(delta):
 	if not(walk_left or walk_right): #If not currently doing either one of these
@@ -131,8 +139,7 @@ func check_left_right_key_press_time(delta):
 	
 	
 func shoot():
-	var b = BULLET.instantiate()
-	#b.position = $Shootpos.position
+	var b = BULLET.instantiate()	
 	get_parent().add_child(b)
 	b.position = $Shootpos.global_position
 	Global.projectile_max_number -= 1
@@ -142,9 +149,41 @@ func _on_shootanimtimer_timeout():
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
+	#death()
+	pass
+
+func _on_pit_ops():
+	death()
+	
+
+func _on_area_2d_body_entered(body):
+	splash()
+	under_water = true
+	$Bubble.start()
+
+
+func _on_area_2d_body_exited(body):
+	splash()
+	under_water = false
+	
+func splash():
+	%SFXplayer.stream = splashsfx
+	%SFXplayer.play()
+	print("splasgh")
+	
+	
+func death():
 	%SFXplayer.stream = defeatsfx
 	%SFXplayer.play()
 	print("ciao")
 	await get_tree().create_timer(2.0).timeout
 	get_tree().change_scene_to_file("res://1.tscn")
 	Global.reset_vars()
+
+
+func _on_bubble_timeout():
+	if under_water == true:
+		var a = BUBBLE.instantiate()
+		get_parent().add_child(a)
+		a.position = self.position + Vector2(16,16)
+		$Bubble.start(2.0)

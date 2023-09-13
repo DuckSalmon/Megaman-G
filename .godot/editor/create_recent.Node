@@ -1,4 +1,12 @@
-CollisionShape2D
-StaticBody2D
 AudioStreamPlayer2D
 VisibleOnScreenNotifier2D
+Area2D
+CollisionShape2D
+AnimatedSprite2D
+Timer
+Node2D
+Label
+AnimationPlayer
+Sprite2D
+Camera2D
+StaticBody2D

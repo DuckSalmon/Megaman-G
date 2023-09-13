@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfq1i5g0xg4s"]
+
+[ext_resource type="Texture2D" uid="uid://br2l4b088xt46" path="res://assets/GFX/player/Bubble.png" id="1_3asry"]
+[ext_resource type="Script" path="res://Bubble.gd" id="1_x7rpk"]
+
+[sub_resource type="Animation" id="Animation_622eb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bxng7"]
+resource_name = "bubble"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bgefd"]
+_data = {
+"RESET": SubResource("Animation_622eb"),
+"bubble": SubResource("Animation_bxng7")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7tdbl"]
+size = Vector2(4, 2)
+
+[node name="Bubble" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_x7rpk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3asry")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_bgefd")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_7tdbl")
+
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

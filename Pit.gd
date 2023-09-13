@@ -1,9 +1,6 @@
-extends Node2D
+extends Area2D
 
-var projectile_max_number := 3
-var player_dir = 1
-var playerxy = Vector2()
-var there_is_bubble := false
+signal ops  #U fallen in a pit or on some spikes
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -13,5 +10,6 @@ func _ready():
 func _process(delta):
 	pass
 
-func reset_vars():
-	projectile_max_number = 3
+
+func _on_body_entered(player):
+	ops.emit()

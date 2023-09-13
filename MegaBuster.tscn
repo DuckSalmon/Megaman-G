@@ -7,6 +7,8 @@
 size = Vector2(8, 8)
 
 [node name="Area2D" type="Area2D"]
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("1_kljql")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -16,5 +18,7 @@ texture = ExtResource("2_bi0x0")
 shape = SubResource("RectangleShape2D_b4jq2")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2.38419e-07, 2.38419e-07)
+scale = Vector2(0.4, 0.4)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
