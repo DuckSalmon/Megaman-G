@@ -150,16 +150,15 @@ _data = {
 size = Vector2(14, 21)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4xk6"]
-size = Vector2(12, 16)
+size = Vector2(6, 6)
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 3
+collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_7gfun")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(16, 16)
 texture = ExtResource("3_nj304")
 hframes = 12
 vframes = 8
@@ -172,7 +171,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(16, 20.5)
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_4rnrp")
 metadata/_edit_lock_ = true
 
@@ -181,25 +180,20 @@ wait_time = 0.25
 one_shot = true
 
 [node name="Shootpos" type="Marker2D" parent="."]
-position = Vector2(32, 19)
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(16, 21)
-scale = Vector2(0.6, 1)
+position = Vector2(13, 3)
 
 [node name="waterdetect" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="waterdetect"]
-position = Vector2(16, 18)
+position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_s4xk6")
 
 [node name="Bubble" type="Timer" parent="."]
 one_shot = true
 
 [connection signal="timeout" from="Shootanimtimer" to="." method="_on_shootanimtimer_timeout"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="body_entered" from="waterdetect" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="waterdetect" to="." method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="Bubble" to="." method="_on_bubble_timeout"]

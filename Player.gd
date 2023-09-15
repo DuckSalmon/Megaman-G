@@ -17,6 +17,7 @@ var ismoving := false
 var is_launching_normal_attack := false
 var is_sliding := false
 var is_onair := false
+var is_rising := false
 var under_water := false
 
 @onready var attacktimer = $Shootanimtimer
@@ -29,7 +30,7 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-	Global.playerxy = self.position
+	Global.playerxy = self.global_position
 
 
 #Animations
@@ -67,13 +68,14 @@ func _physics_process(delta):
 	
 	var target_speed = 0
 	
+	
 	if Input.is_action_pressed("left"):
 		ismoving = true
 		walk_left = true
 	else:
 		walk_left = false
 		ismoving = false
-	
+
 	if Input.is_action_pressed("right"):
 		walk_right = true
 		ismoving = true
@@ -84,12 +86,12 @@ func _physics_process(delta):
 		target_speed += 1
 		$Sprite.scale.x = 1
 		Global.player_dir = 1
-		$Shootpos.position.x = 32
+		$Shootpos.position.x = 13
 	if walk_left == true:
 		target_speed -= 1
 		$Sprite.scale.x = -1
 		Global.player_dir = -1
-		$Shootpos.position.x = 0
+		$Shootpos.position.x = -13
 
 	target_speed *= WALK_SPEED
 	velocity.x = target_speed 
@@ -98,10 +100,13 @@ func _physics_process(delta):
 	# Jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		is_onair = true
+		is_rising = true
 		velocity.y = -JUMP_SPEED * 1.0
+		
 	
-	if Input.is_action_just_released("jump"):
+	if Input.is_action_just_released("jump") and is_rising == true:
 		velocity.y = 0
+		is_rising = false
 	
 	# Slide2
 	if Input.is_action_pressed("jump") and Input.is_action_pressed("down"):
@@ -139,21 +144,19 @@ func check_left_right_key_press_time(delta):
 	
 	
 func shoot():
-	var b = BULLET.instantiate()	
+	var b = BULLET.instantiate()
 	get_parent().add_child(b)
 	b.position = $Shootpos.global_position
 	Global.projectile_max_number -= 1
+	
 
 func _on_shootanimtimer_timeout():
 	is_launching_normal_attack = false
 
 
-func _on_visible_on_screen_notifier_2d_screen_exited():
-	#death()
-	pass
-
 func _on_pit_ops():
 	death()
+	
 	
 
 func _on_area_2d_body_entered(body):
@@ -185,5 +188,5 @@ func _on_bubble_timeout():
 	if under_water == true:
 		var a = BUBBLE.instantiate()
 		get_parent().add_child(a)
-		a.position = self.position + Vector2(16,16)
-		$Bubble.start(2.0)
+		a.position = self.position + Vector2(0,4)
+		$Bubble.start(0.0)

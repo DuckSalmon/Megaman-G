@@ -1,8 +1,9 @@
 res://1.tscn
+res://Peterchy.gd
 res://player.tscn
 res://Bubble.tscn
 res://MegaBuster.tscn
-res://BubbleGenerator.gd
+res://Peterchy.tscn
 res://Player.gd
-res://Peterchy.gd
-res://mega_buster.gd
+res://Global.gd
+res://Bubble.gd

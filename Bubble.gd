@@ -16,3 +16,5 @@ func _process(delta):
 func _on_body_exited(body):
 	queue_free()
 
+
+
