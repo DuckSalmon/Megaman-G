@@ -1,3 +1,6 @@
+AnimationPlayer
+Sprite2D
+CanvasLayer
 AudioStreamPlayer
 Timer
 AnimatedSprite2D
@@ -9,7 +12,3 @@ CharacterBody2D
 AudioStreamPlayer2D
 VisibleOnScreenNotifier2D
 Node2D
-AnimationPlayer
-Sprite2D
-Camera2D
-StaticBody2D

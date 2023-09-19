@@ -1,9 +1,5 @@
-extends Node2D
+extends CanvasLayer
 
-var projectile_max_number := 3
-var player_dir = 1
-var playerxy = Vector2()
-var playerHP := 28
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,8 +8,5 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-
-func reset_vars():
-	projectile_max_number = 3
-	playerHP = 28
+	var points = Global.playerHP
+	$Healthbar.frame = int(clamp(points, 0, 28))
