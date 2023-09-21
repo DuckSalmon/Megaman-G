@@ -1,5 +1,7 @@
-res://player.tscn
 res://1.tscn
+res://player.tscn
 res://MegaBuster.tscn
 res://Peterchy.tscn
-res://Peterchy.gd
+res://MM_Explosion.tscn
+res://ExplParticle.tscn
+res://Particle.gd

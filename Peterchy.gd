@@ -21,7 +21,6 @@ func _process(delta):
 		$Sprite.hide()
 		$Explosion.show()
 		$Explosion.play()
-		
 		#queue_free()
 
 	#Add gravity

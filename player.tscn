@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bq6mgekl3uhqd"]
+[gd_scene load_steps=22 format=3 uid="uid://bq6mgekl3uhqd"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_7gfun"]
 [ext_resource type="Texture2D" uid="uid://b2r0mvkhsp544" path="res://assets/GFX/player/MegaMan.png" id="3_nj304"]
@@ -34,6 +34,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_b8uwb"]
@@ -163,6 +175,44 @@ _data = {
 "walk": SubResource("Animation_xtd5c")
 }
 
+[sub_resource type="Animation" id="Animation_3w4gp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_o0j23"]
+resource_name = "flickering"
+length = 0.06
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bhkr8"]
+_data = {
+"RESET": SubResource("Animation_3w4gp"),
+"flickering": SubResource("Animation_o0j23")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4rnrp"]
 size = Vector2(14, 21)
 
@@ -225,6 +275,11 @@ libraries = {
 "": SubResource("AnimationLibrary_5xxjd")
 }
 
+[node name="Flickering" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_bhkr8")
+}
+
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_4rnrp")
@@ -249,7 +304,6 @@ shape = SubResource("RectangleShape2D_s4xk6")
 one_shot = true
 
 [node name="HitSprite" type="Sprite2D" parent="."]
-visible = false
 z_index = 1
 texture = ExtResource("3_wyc4v")
 
@@ -258,7 +312,18 @@ libraries = {
 "": SubResource("AnimationLibrary_cimx4")
 }
 
+[node name="Label" type="Label" parent="."]
+offset_top = -32.0
+offset_right = 40.0
+offset_bottom = -9.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="Invincibility" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="timeout" from="Shootanimtimer" to="." method="_on_shootanimtimer_timeout"]
 [connection signal="body_entered" from="waterdetect" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="waterdetect" to="." method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="Bubble" to="." method="_on_bubble_timeout"]
+[connection signal="timeout" from="Invincibility" to="." method="_on_invincibility_timeout"]

@@ -5,9 +5,7 @@ extends CharacterBody2D
 @onready var BUBBLE = preload("res://Bubble.tscn")
 
 var WALK_SPEED := 82.5
-var VELOCITY_X_DAMPING = 0.1
 var JUMP_SPEED = 285.0
-var GRAVITY_VEC := Vector2(0, 1)
 var MAX_FALL_SPEED := 420.0
 var left_right_key_press_time: float = 0
 
@@ -21,6 +19,7 @@ var is_rising := false
 var under_water := false
 var is_taking_damage := false
 var cannot_move := false
+var is_invincible := false
 
 
 @onready var attacktimer = $Shootanimtimer
@@ -31,13 +30,15 @@ var cannot_move := false
 @onready var damagesfx = preload("res://assets/AUDIO/SFX/MMdamage.wav")
 
 func _ready():
-	pass
-
+	$HitSprite.hide()
+	
 func _physics_process(delta):
 	Global.playerxy = self.global_position
+	$Label.text = str(global_position.x)
 
 
 #Animations
+ 
 	if is_taking_damage == true:
 		$Sprite/AnimationPlayer.play("damage")
 	else:
@@ -64,12 +65,11 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y = clamp(velocity.y + 15.0, -MAX_FALL_SPEED, MAX_FALL_SPEED)
-	
-	
+
 	if velocity.y > MAX_FALL_SPEED: #Limits fall speeds
 		velocity.y = MAX_FALL_SPEED
-	
-	
+
+
 	check_left_right_key_press_time(delta)
 	
 	var target_speed = 0
@@ -152,8 +152,8 @@ func check_left_right_key_press_time(delta):
 
 
 	move_and_slide()
-	
-	
+
+
 func shoot():
 	var b = BULLET.instantiate()
 	get_parent().add_child(b)
@@ -167,7 +167,6 @@ func _on_shootanimtimer_timeout():
 
 func _on_pit_ops():
 	death()
-	
 	
 
 func _on_area_2d_body_entered(body):
@@ -185,32 +184,40 @@ func splash():
 	%SFXplayer.play()
 	print("splasgh")
 	
-	
+	#Death anim and explosions + scene reload
 func death():
+	is_invincible = true
+	$Sprite.hide()
+	var piupiu = preload("res://MM_Explosion.tscn")
+	var p = piupiu.instantiate()
+	get_parent().add_child(p)
 	cannot_move = true
 	collision_layer = 0
-	$Sprite.hide()
 	%SFXplayer2.stream = defeatsfx
 	%SFXplayer2.play()
 	print("ciao")
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(3.0).timeout
 	get_tree().change_scene_to_file("res://1.tscn")
 	Global.reset_vars()
 	
 #Damage
 func damage(damage):
-	if is_taking_damage == false:
-		is_taking_damage = true
-		cannot_move = true
-		$Sprite/AnimationPlayer.play("damage")
-		%SFXplayer.stream = damagesfx
-		%SFXplayer.play()
-		$HitSprite/Anim.play("vis")
+	if is_taking_damage == false and is_invincible == false:
 		Global.playerHP -= damage
-		await get_tree().create_timer(0.3).timeout
-		$HitSprite/Anim.stop()
-		is_taking_damage = false
-		cannot_move = false
+		if Global.playerHP > 0:
+			is_invincible = true
+			is_taking_damage = true
+			cannot_move = true
+			$Invincibility.start()
+			$Sprite/Flickering.play("flickering")
+			%SFXplayer.stream = damagesfx
+			%SFXplayer.play()
+			#damage effect white sprite anim and stun
+			$HitSprite/Anim.play("vis")
+			await get_tree().create_timer(0.3).timeout
+			$HitSprite/Anim.stop()
+			is_taking_damage = false
+			cannot_move = false
 
 
 func _on_bubble_timeout():
@@ -219,3 +226,9 @@ func _on_bubble_timeout():
 		get_parent().add_child(a)
 		a.position = self.position + Vector2(0,4)
 		$Bubble.start(0.0)
+
+
+func _on_invincibility_timeout():
+	is_invincible = false
+	$Sprite/Flickering.stop()
+	
