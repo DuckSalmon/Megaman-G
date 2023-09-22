@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx77tnbbuuksa"]
+
+[ext_resource type="AudioStream" uid="uid://dc3vdbafxru8k" path="res://assets/AUDIO/SFX/Landing.wav" id="1_dgwg1"]
+[ext_resource type="Script" path="res://audioplayer.gd" id="1_jyrhj"]
+
+[node name="AUDIO" type="Node"]
+script = ExtResource("1_jyrhj")
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+
+[node name="SFX1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_dgwg1")
+
+[node name="SFX2" type="AudioStreamPlayer" parent="."]

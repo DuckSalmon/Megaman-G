@@ -101,7 +101,7 @@ collision_layer = 0
 script = ExtResource("1_1v4ti")
 direction = -1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_rngw6")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -129,6 +129,7 @@ sprite_frames = SubResource("SpriteFrames_hmkl7")
 frame = 4
 frame_progress = 1.0
 
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="timeout" from="ChangeDirectionTimer" to="." method="_on_change_direction_timer_timeout"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

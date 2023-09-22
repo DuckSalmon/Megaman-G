@@ -127,13 +127,11 @@ func _physics_process(delta):
 			attacktimer.start() #add timer to the flag, after this time animations turns in non attacking
 			if Global.projectile_max_number > 0:
 				shoot()
-				%SFXplayer.stream = megabustersfx
-				%SFXplayer.play()
+				Audio.playsfx2(megabustersfx)
 			
 	if is_on_floor():
 		if is_onair == false:
-			%SFXplayer.stream = landsfx
-			%SFXplayer.play()
+			Audio.playsfx(landsfx)
 			is_onair = true
 	else:
 		if is_onair == true:
@@ -180,8 +178,7 @@ func _on_area_2d_body_exited(body):
 	under_water = false
 	
 func splash():
-	%SFXplayer.stream = splashsfx
-	%SFXplayer.play()
+	Audio.playsfx2(splashsfx)	
 	print("splasgh")
 	
 	#Death anim and explosions + scene reload
@@ -193,11 +190,11 @@ func death():
 	get_parent().add_child(p)
 	cannot_move = true
 	collision_layer = 0
-	%SFXplayer2.stream = defeatsfx
-	%SFXplayer2.play()
+	$Collision.disabled = 1
+	Audio.playsfx(defeatsfx)
 	print("ciao")
 	await get_tree().create_timer(3.0).timeout
-	get_tree().change_scene_to_file("res://1.tscn")
+	get_tree().change_scene_to_file("res://IceManStage.tscn")
 	Global.reset_vars()
 	
 #Damage
@@ -210,8 +207,7 @@ func damage(damage):
 			cannot_move = true
 			$Invincibility.start()
 			$Sprite/Flickering.play("flickering")
-			%SFXplayer.stream = damagesfx
-			%SFXplayer.play()
+			Audio.playsfx2(damagesfx)
 			#damage effect white sprite anim and stun
 			$HitSprite/Anim.play("vis")
 			await get_tree().create_timer(0.3).timeout

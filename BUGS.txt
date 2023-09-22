@@ -1,0 +1,13 @@
+  ____  _    _  _____  _____ 
+ |  _ \| |  | |/ ____|/ ____|
+ | |_) | |  | | |  __| (___  
+ |  _ <| |  | | | |_ |\___ \ 
+ | |_) | |__| | |__| |____) |
+ |____/ \____/ \_____|_____/ 
+                             
+                             
+- When player shoots 2 or more overlapped enemies, both are hit and Projectile count increase above the max number that is 3. (the child counter used in spawner can fix this)
+- Half jump cause some stuttering.
+- Bubbles if spawn near the surface of water can spawn outside of the water and never explodes.
+- Megaman sprite array needs various position adjustements.
+

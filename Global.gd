@@ -4,6 +4,7 @@ var projectile_max_number := 3
 var player_dir = 1
 var playerxy = Vector2()
 var playerHP := 28
+var current_respawnxy = Vector2i.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

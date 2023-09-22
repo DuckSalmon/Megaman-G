@@ -4,4 +4,15 @@ res://MegaBuster.tscn
 res://Peterchy.tscn
 res://MM_Explosion.tscn
 res://ExplParticle.tscn
-res://Particle.gd
+res://Enemie_spawner.tscn
+res://IceManStage.tscn
+res://audioplayer.tscn
+res://audioplayer.gd
+res://IceManStage.gd
+res://Player.gd
+res://Peterchy.gd
+res://default_bus_layout.tres
+res://Global.gd
+res://EnemieSpawner.gd
+res://Pit.tscn
+res://Pit.gd

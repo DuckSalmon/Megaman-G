@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6nt4jxlrow78"]
+
+[ext_resource type="Script" path="res://HUD.gd" id="1_upef3"]
+[ext_resource type="Texture2D" uid="uid://k5vwhoxunro1" path="res://assets/GFX/player/HPbar.png" id="2_byjde"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_upef3")
+
+[node name="Healthbar" type="Sprite2D" parent="."]
+position = Vector2(20, 16)
+texture = ExtResource("2_byjde")
+centered = false
+hframes = 29
+frame = 28
