@@ -13,13 +13,16 @@ config_version=5
 config/name="MegaManG"
 run/main_scene="res://IceManStage.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/show_image=false
+config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
 Global="*res://Global.gd"
 Hud="*res://HUD.tscn"
 Audio="*res://audioplayer.tscn"
+Effect_manager="*res://EM.tscn"
 
 [display]
 

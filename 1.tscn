@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://btlawjkdvxepv"]
+[gd_scene load_steps=11 format=3 uid="uid://btlawjkdvxepv"]
 
 [ext_resource type="Script" path="res://Global.gd" id="1_at7ti"]
 [ext_resource type="PackedScene" uid="uid://casqjw6k50n76" path="res://IceManStage.tscn" id="3_daxbj"]
 [ext_resource type="PackedScene" uid="uid://dtagjyukwgdfj" path="res://MapBorder.tscn" id="5_4nfnu"]
 [ext_resource type="Script" path="res://CanvasLayer.gd" id="5_sg18t"]
 [ext_resource type="PackedScene" uid="uid://gay0l55hi0ur" path="res://Pit.tscn" id="6_jfevq"]
+[ext_resource type="PackedScene" uid="uid://bka54stvhpu33" path="res://EM.tscn" id="7_b3imh"]
 [ext_resource type="PackedScene" uid="uid://c6nt4jxlrow78" path="res://HUD.tscn" id="8_68v5w"]
+[ext_resource type="PackedScene" uid="uid://dgxtbk1htybyh" path="res://Telly.tscn" id="8_dktb2"]
+[ext_resource type="PackedScene" uid="uid://cgtxgutiag5ff" path="res://PtSnakey.tscn" id="9_ghg26"]
+[ext_resource type="PackedScene" uid="uid://cbho8bhkl7gvv" path="res://EnemieBullet.tscn" id="10_6fhlq"]
 
 [node name="Node" type="Node"]
 
@@ -13,7 +17,6 @@
 script = ExtResource("1_at7ti")
 
 [node name="IceManStage" parent="." instance=ExtResource("3_daxbj")]
-music = null
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("5_sg18t")
@@ -28,3 +31,11 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 [node name="Pit" parent="." instance=ExtResource("6_jfevq")]
 
 [node name="HUD" parent="." instance=ExtResource("8_68v5w")]
+
+[node name="EffectManager" parent="." instance=ExtResource("7_b3imh")]
+
+[node name="Telly" parent="." instance=ExtResource("8_dktb2")]
+
+[node name="Node2D" parent="." instance=ExtResource("9_ghg26")]
+
+[node name="EnemieBullet" parent="." instance=ExtResource("10_6fhlq")]

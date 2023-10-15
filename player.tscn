@@ -216,7 +216,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4rnrp"]
 size = Vector2(14, 21)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4xk6"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u011g"]
 size = Vector2(6, 6)
 
 [sub_resource type="Animation" id="Animation_0g66m"]
@@ -297,10 +297,11 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="waterdetect"]
-position = Vector2(0, 5)
-shape = SubResource("RectangleShape2D_s4xk6")
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_u011g")
 
 [node name="Bubble" type="Timer" parent="."]
+wait_time = 2.5
 one_shot = true
 
 [node name="HitSprite" type="Sprite2D" parent="."]

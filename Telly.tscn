@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://dgxtbk1htybyh"]
+
+[ext_resource type="Script" path="res://Telly.gd" id="1_2ufxh"]
+[ext_resource type="Texture2D" uid="uid://b0njye63bycmb" path="res://assets/GFX/Enemies/Telly.png" id="1_ddfl3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12kba"]
+atlas = ExtResource("1_ddfl3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nm3n"]
+atlas = ExtResource("1_ddfl3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dae7w"]
+atlas = ExtResource("1_ddfl3")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbj0e"]
+atlas = ExtResource("1_ddfl3")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vvlu"]
+atlas = ExtResource("1_ddfl3")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myilk"]
+atlas = ExtResource("1_ddfl3")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8bkd2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12kba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nm3n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dae7w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbj0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vvlu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myilk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_splh5"]
+size = Vector2(16, 16)
+
+[node name="Telly" type="CharacterBody2D"]
+script = ExtResource("1_2ufxh")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8bkd2")
+autoplay = "default"
+frame_progress = 0.917425
+
+[node name="Area2D" type="Area2D" parent="Sprite"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
+shape = SubResource("RectangleShape2D_splh5")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="Sprite/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Sprite/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

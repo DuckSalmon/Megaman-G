@@ -1,8 +1,6 @@
 extends CharacterBody2D
 
 @export var projectile = PackedScene
-@onready var BULLET = preload("res://MegaBuster.tscn")
-@onready var BUBBLE = preload("res://Bubble.tscn")
 
 var WALK_SPEED := 82.5
 var JUMP_SPEED = 285.0
@@ -21,21 +19,19 @@ var is_taking_damage := false
 var cannot_move := false
 var is_invincible := false
 
-
 @onready var attacktimer = $Shootanimtimer
 @onready var landsfx = preload("res://assets/AUDIO/SFX/Landing.wav")
 @onready var defeatsfx = preload("res://assets/AUDIO/SFX/MegamanDefeat.wav")
-@onready var megabustersfx = preload("res://assets/AUDIO/SFX/MegaBuster.wav")
 @onready var splashsfx = preload("res://assets/AUDIO/SFX/splash.wav")
 @onready var damagesfx = preload("res://assets/AUDIO/SFX/MMdamage.wav")
 
 func _ready():
 	$HitSprite.hide()
 	
+	
 func _physics_process(delta):
 	Global.playerxy = self.global_position
-	$Label.text = str(global_position.x)
-
+	$Label.text = str(Global.playerxy)
 
 #Animations
  
@@ -116,7 +112,8 @@ func _physics_process(delta):
 			velocity.y = 0
 			is_rising = false
 		
-		# Slide2
+		
+		# Slide WIP
 		if Input.is_action_pressed("jump") and Input.is_action_pressed("down"):
 			is_sliding = true
 			print("slide")
@@ -125,9 +122,9 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("shoot"):
 			is_launching_normal_attack = true
 			attacktimer.start() #add timer to the flag, after this time animations turns in non attacking
-			if Global.projectile_max_number > 0:
-				shoot()
-				Audio.playsfx2(megabustersfx)
+			var projectile_pos = $Shootpos.global_position
+			Effect_manager.shoot(projectile_pos)
+			
 			
 	if is_on_floor():
 		if is_onair == false:
@@ -151,14 +148,6 @@ func check_left_right_key_press_time(delta):
 
 	move_and_slide()
 
-
-func shoot():
-	var b = BULLET.instantiate()
-	get_parent().add_child(b)
-	b.position = $Shootpos.global_position
-	Global.projectile_max_number -= 1
-	
-
 func _on_shootanimtimer_timeout():
 	is_launching_normal_attack = false
 
@@ -171,14 +160,14 @@ func _on_area_2d_body_entered(body):
 	splash()
 	under_water = true
 	$Bubble.start()
-
+	
 
 func _on_area_2d_body_exited(body):
 	splash()
 	under_water = false
 	
 func splash():
-	Audio.playsfx2(splashsfx)	
+	Audio.playsfx2(splashsfx)
 	print("splasgh")
 	
 	#Death anim and explosions + scene reload
@@ -216,15 +205,11 @@ func damage(damage):
 			cannot_move = false
 
 
-func _on_bubble_timeout():
-	if under_water == true:
-		var a = BUBBLE.instantiate()
-		get_parent().add_child(a)
-		a.position = self.position + Vector2(0,4)
-		$Bubble.start(0.0)
-
-
 func _on_invincibility_timeout():
 	is_invincible = false
 	$Sprite/Flickering.stop()
-	
+
+func _on_bubble_timeout():
+	if under_water == true:
+		Effect_manager.bubble()
+		$Bubble.start()

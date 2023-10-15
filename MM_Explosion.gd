@@ -3,6 +3,15 @@ extends Node2D
 @onready var particle = preload("res://ExplParticle.tscn")
 
 func _ready():
+	bum()
+
+#get_tree().create_timer(2.0).timeout 
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+	
+func bum():
 	var a = particle.instantiate()
 	get_parent().add_child(a)
 	a.speed *= 1.41
@@ -31,15 +40,6 @@ func _ready():
 	var h = particle.instantiate()
 	get_parent().add_child(h)
 	h.direction = Vector2i(-1, 1)
-	
-	
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-	
-func bum():
-	var b = particle.instantiate()
-	get_parent().add_child(b)
-	b.position = Global.playerxy
+	#var b = particle.instantiate()
+	#get_parent().add_child(b)
+	#b.position = Global.playerxy
