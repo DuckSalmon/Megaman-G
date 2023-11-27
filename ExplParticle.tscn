@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cnt4rw21otd21"]
 
 [ext_resource type="Texture2D" uid="uid://cp6rjcceam0nl" path="res://assets/GFX/Effects/explosion.png" id="1_xvvbn"]
-[ext_resource type="Script" path="res://Particle.gd" id="2_icdpm"]
+[ext_resource type="Script" path="res://script/Particle.gd" id="2_icdpm"]
 
 [sub_resource type="Animation" id="Animation_bv7pt"]
 resource_name = "Explosion"

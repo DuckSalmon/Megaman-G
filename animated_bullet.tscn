@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://bw6j7cg5o0pof"]
+
+[ext_resource type="Script" path="res://script/EnemieBullet.gd" id="1_bsv4i"]
+[ext_resource type="Texture2D" uid="uid://bitgts75b65ua" path="res://assets/GFX/Enemies/hammer.png" id="2_y5lep"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0lsi4"]
+size = Vector2(10, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8m2ek"]
+atlas = ExtResource("2_y5lep")
+region = Rect2(0, 0, 20, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8n8u"]
+atlas = ExtResource("2_y5lep")
+region = Rect2(20, 0, 20, 9)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_otwah"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8m2ek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8n8u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="AnimatedBullet" type="Area2D"]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_bsv4i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5, 0)
+shape = SubResource("RectangleShape2D_0lsi4")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_otwah")
+autoplay = "default"
+frame_progress = 0.435528
+metadata/_edit_lock_ = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+position = Vector2(0, -2.38419e-07)
+scale = Vector2(1, 0.4)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

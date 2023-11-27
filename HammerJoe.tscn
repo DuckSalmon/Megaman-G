@@ -1,0 +1,119 @@
+[gd_scene load_steps=9 format=3 uid="uid://cbi1r0tv1k80s"]
+
+[ext_resource type="Script" path="res://script/HammerJoe.gd" id="1_rsbmp"]
+[ext_resource type="Texture2D" uid="uid://3wv8fg5cnucq" path="res://assets/GFX/Enemies/HammerJoe.png" id="2_8nko4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mcpi4"]
+size = Vector2(28, 34)
+
+[sub_resource type="Animation" id="Animation_623sg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_8j5gj"]
+resource_name = "aim"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_85vf7"]
+resource_name = "load"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_y051k"]
+resource_name = "shoot"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yh4ti"]
+_data = {
+"RESET": SubResource("Animation_623sg"),
+"aim": SubResource("Animation_8j5gj"),
+"load": SubResource("Animation_85vf7"),
+"shoot": SubResource("Animation_y051k")
+}
+
+[node name="HammerJoe" type="Area2D"]
+scale = Vector2(-1, 1)
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_rsbmp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_mcpi4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_8nko4")
+hframes = 5
+vframes = 2
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_yh4ti")
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Timeraim" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2.38419e-07, 4)
+scale = Vector2(1.4, 1.7)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="Sprite2D/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timeraim" to="." method="_on_timeraim_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

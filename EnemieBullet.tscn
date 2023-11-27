@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cbho8bhkl7gvv"]
 
-[ext_resource type="Script" path="res://EnemieBullet.gd" id="1_pm6on"]
-[ext_resource type="Texture2D" uid="uid://bhidbr2kix7tj" path="res://assets/GFX/Enemies/enemieshot.png" id="2_0uo6q"]
+[ext_resource type="Script" path="res://script/EnemieBullet.gd" id="1_m68mo"]
+[ext_resource type="Texture2D" uid="uid://l8w1if1ga8d" path="res://assets/GFX/Enemies/bullet1.png" id="2_oqa5h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pd7ab"]
 size = Vector2(8, 8)
@@ -9,10 +9,10 @@ size = Vector2(8, 8)
 [node name="EnemieBullet" type="Area2D"]
 collision_layer = 0
 collision_mask = 8
-script = ExtResource("1_pm6on")
+script = ExtResource("1_m68mo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_0uo6q")
+texture = ExtResource("2_oqa5h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_pd7ab")

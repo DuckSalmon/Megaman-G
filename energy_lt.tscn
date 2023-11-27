@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://b0y21w5hcvfs5"]
+
+[ext_resource type="Script" path="res://script/energy_lt.gd" id="1_qlo6g"]
+[ext_resource type="Texture2D" uid="uid://o3e4p7qnw5ty" path="res://assets/GFX/Effects/energy.png" id="2_wyams"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3q6k3"]
+size = Vector2(6, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_io33y"]
+atlas = ExtResource("2_wyams")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6oyo"]
+atlas = ExtResource("2_wyams")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p3t3s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_io33y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6oyo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6u40u"]
+size = Vector2(6, 6)
+
+[node name="EnergyLt" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_qlo6g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3q6k3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_p3t3s")
+autoplay = "default"
+frame_progress = 0.340755
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_6u40u")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

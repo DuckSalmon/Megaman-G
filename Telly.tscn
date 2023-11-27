@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://dgxtbk1htybyh"]
 
-[ext_resource type="Script" path="res://Telly.gd" id="1_2ufxh"]
+[ext_resource type="Script" path="res://script/Telly.gd" id="1_7o3cg"]
 [ext_resource type="Texture2D" uid="uid://b0njye63bycmb" path="res://assets/GFX/Enemies/Telly.png" id="1_ddfl3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_12kba"]
@@ -57,7 +57,7 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="Telly" type="CharacterBody2D"]
-script = ExtResource("1_2ufxh")
+script = ExtResource("1_7o3cg")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8bkd2")
@@ -72,6 +72,8 @@ collision_mask = 8
 shape = SubResource("RectangleShape2D_splh5")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-7.15256e-07, 0)
+scale = Vector2(0.8, 0.8)
 
 [connection signal="area_entered" from="Sprite/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Sprite/Area2D" to="." method="_on_area_2d_body_entered"]

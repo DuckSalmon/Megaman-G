@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://1xelpqk8dimq"]
 
-[ext_resource type="Script" path="res://Peterchy.gd" id="1_1v4ti"]
+[ext_resource type="Script" path="res://script/Peterchy.gd" id="1_3qvs3"]
 [ext_resource type="Texture2D" uid="uid://bswrev6khkk2b" path="res://assets/GFX/Enemies/Peterchy.png" id="2_427mq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rngw6"]
@@ -54,7 +54,7 @@ size = Vector2(30, 30)
 
 [node name="Peterchy" type="CharacterBody2D"]
 collision_layer = 0
-script = ExtResource("1_1v4ti")
+script = ExtResource("1_3qvs3")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_rngw6")

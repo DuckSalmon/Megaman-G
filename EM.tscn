@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://bka54stvhpu33"]
 
-[ext_resource type="Script" path="res://EffectManager.gd" id="1_cyxjp"]
+[ext_resource type="Script" path="res://script/EffectManager.gd" id="1_gfbhe"]
 
 [node name="EffectManager" type="Node2D"]
 z_index = 1
-script = ExtResource("1_cyxjp")
+script = ExtResource("1_gfbhe")

@@ -1,25 +1,30 @@
-[gd_scene load_steps=11 format=3 uid="uid://btlawjkdvxepv"]
+[gd_scene load_steps=16 format=3 uid="uid://btlawjkdvxepv"]
 
-[ext_resource type="Script" path="res://Global.gd" id="1_at7ti"]
+[ext_resource type="Script" path="res://script/Global.gd" id="1_1j71t"]
 [ext_resource type="PackedScene" uid="uid://casqjw6k50n76" path="res://IceManStage.tscn" id="3_daxbj"]
+[ext_resource type="Script" path="res://script/CanvasLayer.gd" id="3_xrrov"]
 [ext_resource type="PackedScene" uid="uid://dtagjyukwgdfj" path="res://MapBorder.tscn" id="5_4nfnu"]
-[ext_resource type="Script" path="res://CanvasLayer.gd" id="5_sg18t"]
 [ext_resource type="PackedScene" uid="uid://gay0l55hi0ur" path="res://Pit.tscn" id="6_jfevq"]
 [ext_resource type="PackedScene" uid="uid://bka54stvhpu33" path="res://EM.tscn" id="7_b3imh"]
 [ext_resource type="PackedScene" uid="uid://c6nt4jxlrow78" path="res://HUD.tscn" id="8_68v5w"]
 [ext_resource type="PackedScene" uid="uid://dgxtbk1htybyh" path="res://Telly.tscn" id="8_dktb2"]
 [ext_resource type="PackedScene" uid="uid://cgtxgutiag5ff" path="res://PtSnakey.tscn" id="9_ghg26"]
 [ext_resource type="PackedScene" uid="uid://cbho8bhkl7gvv" path="res://EnemieBullet.tscn" id="10_6fhlq"]
+[ext_resource type="PackedScene" uid="uid://jbbdoamiq2bd" path="res://met_dx.tscn" id="11_2tfhb"]
+[ext_resource type="PackedScene" uid="uid://cbi1r0tv1k80s" path="res://HammerJoe.tscn" id="12_um3ug"]
+[ext_resource type="PackedScene" uid="uid://bw6j7cg5o0pof" path="res://animated_bullet.tscn" id="13_3otwe"]
+[ext_resource type="PackedScene" uid="uid://hjxxnrlewtwh" path="res://energy_big.tscn" id="14_adgv3"]
+[ext_resource type="PackedScene" uid="uid://b0y21w5hcvfs5" path="res://energy_lt.tscn" id="15_08cn5"]
 
 [node name="Node" type="Node"]
 
 [node name="Global" type="Node2D" parent="."]
-script = ExtResource("1_at7ti")
+script = ExtResource("1_1j71t")
 
 [node name="IceManStage" parent="." instance=ExtResource("3_daxbj")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource("5_sg18t")
+script = ExtResource("3_xrrov")
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 offset_right = 40.0
@@ -39,3 +44,14 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 [node name="Node2D" parent="." instance=ExtResource("9_ghg26")]
 
 [node name="EnemieBullet" parent="." instance=ExtResource("10_6fhlq")]
+
+[node name="MetDX" parent="." instance=ExtResource("11_2tfhb")]
+position = Vector2(95, 129)
+
+[node name="HammerJoe" parent="." instance=ExtResource("12_um3ug")]
+
+[node name="AnimatedBullet" parent="." instance=ExtResource("13_3otwe")]
+
+[node name="EnergyBig" parent="." instance=ExtResource("14_adgv3")]
+
+[node name="EnergyLt" parent="." instance=ExtResource("15_08cn5")]

@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckqui7e4bjm5u"]
+[gd_scene load_steps=3 format=3 uid="uid://3mhnqi3hq7mu"]
 
-[ext_resource type="Script" path="res://EnemieSpawner.gd" id="1_oinwq"]
+[ext_resource type="Script" path="res://script/EnemieSpawner.gd" id="1_3x0dv"]
 [ext_resource type="PackedScene" uid="uid://1xelpqk8dimq" path="res://Peterchy.tscn" id="2_te5jg"]
 
 [node name="EnemieSpawner" type="Node2D"]
-script = ExtResource("1_oinwq")
+script = ExtResource("1_3x0dv")
 enemie = ExtResource("2_te5jg")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

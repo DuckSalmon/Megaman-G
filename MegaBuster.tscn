@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://e1ynfub15k2e"]
 
-[ext_resource type="Script" path="res://mega_buster.gd" id="1_kljql"]
+[ext_resource type="Script" path="res://script/mega_buster.gd" id="1_ghky2"]
 [ext_resource type="Texture2D" uid="uid://cj0ls6o46thbk" path="res://assets/GFX/Projectile/MegaBusterProjectile.png" id="2_bi0x0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b4jq2"]
@@ -9,7 +9,7 @@ size = Vector2(8, 8)
 [node name="Area2D" type="Area2D"]
 collision_layer = 8
 collision_mask = 8
-script = ExtResource("1_kljql")
+script = ExtResource("1_ghky2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_bi0x0")
