@@ -4,11 +4,10 @@ extends Node2D
 @onready var BUBBLE = preload("res://Bubble.tscn")
 @onready var BULLET = preload("res://MegaBuster.tscn")
 @onready var megabustersfx = preload("res://assets/AUDIO/SFX/MegaBuster.wav")
-@onready var miniene = preload("res://energy_lt.tscn")
-@onready var miniwep = preload("res://WPNEnergy.tscn")
-@onready var bigene = preload("res://energy_big.tscn")
-@onready var bigwep = preload("res://WPNEnergyBig.tscn")
-
+@onready var miniene = preload("res://Scenes/Items/energy_lt.tscn")
+@onready var miniwep = preload("res://Scenes/Items/WPNEnergy.tscn")
+@onready var bigene = preload("res://Scenes/Items/energy_big.tscn")
+@onready var bigwep = preload("res://Scenes/Items/WPNEnergyBig.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -62,9 +61,6 @@ func explosion(pos):
 		a.timer()
 	else:
 		print("nothing")
-		
-		
-
 
 func heal(health):
 	Global.playerHP += health

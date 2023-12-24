@@ -40,6 +40,7 @@ func _on_area_entered(area):
 		health -= 1
 		Audio.damagesfx()
 		area.queue_free()
+		$Sprite2D/HitAnim.play("hit")
 
 func _on_body_entered(player):
 	player.damage(damage)

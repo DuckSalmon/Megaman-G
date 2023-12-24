@@ -31,7 +31,7 @@ func _ready():
 	
 func _physics_process(delta):
 	Global.playerxy = self.global_position
-	$Label.text = str(Global.playerHP)
+	#$Label.text = str()
 
 #Animations
  

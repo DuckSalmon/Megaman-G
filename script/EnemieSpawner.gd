@@ -25,7 +25,10 @@ func _on_visible_on_screen_notifier_2d_screen_entered():
 			$Timer.wait_time = respawn_time
 			$Timer.start()
 	if spawn_type == 1:
-		spawn()
+		var num = get_child_count()
+		if num < 3:
+			spawn()
+		
 
 func spawn():
 	var a = enemie.instantiate()

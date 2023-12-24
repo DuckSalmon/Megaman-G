@@ -1,14 +1,14 @@
-Timer
+Marker2D
 Label
+Timer
+AnimationPlayer
 CollisionShape2D
 Area2D
 AnimatedSprite2D
 CharacterBody2D
 RigidBody2D
 StaticBody2D
-Marker2D
 VisibleOnScreenNotifier2D
-AnimationPlayer
 Sprite2D
 Node2D
 ShaderGlobalsOverride

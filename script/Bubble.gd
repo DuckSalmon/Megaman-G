@@ -1,6 +1,6 @@
 extends Area2D
 
-var speed = 35
+var speed = 60
 
 func _ready():
 	$Sprite2D/AnimationPlayer.play("bubble")
