@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MegaManG"
-run/main_scene="res://IceManStage.tscn"
+run/main_scene="res://test_man_stage.tscn"
 config/features=PackedStringArray("4.3")
 boot_splash/show_image=false
 config/icon="res://icon.png"
@@ -30,6 +30,13 @@ window/size/viewport_width=768
 window/size/viewport_height=720
 window/size/resizable=false
 window/stretch/scale=3.0
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "teal",
+"res://script/": "gray"
+}
 
 [input]
 

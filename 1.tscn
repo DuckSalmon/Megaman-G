@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://btlawjkdvxepv"]
+[gd_scene load_steps=17 format=3 uid="uid://btlawjkdvxepv"]
 
 [ext_resource type="Script" path="res://script/Global.gd" id="1_1j71t"]
 [ext_resource type="PackedScene" uid="uid://casqjw6k50n76" path="res://IceManStage.tscn" id="3_daxbj"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bw6j7cg5o0pof" path="res://animated_bullet.tscn" id="13_3otwe"]
 [ext_resource type="PackedScene" uid="uid://hjxxnrlewtwh" path="res://Scenes/Items/energy_big.tscn" id="14_adgv3"]
 [ext_resource type="PackedScene" uid="uid://b0y21w5hcvfs5" path="res://Scenes/Items/energy_lt.tscn" id="15_08cn5"]
+[ext_resource type="PackedScene" uid="uid://47rkjdq2rw3" path="res://test_man_stage.tscn" id="16_5nq7k"]
 
 [node name="Node" type="Node"]
 
@@ -55,3 +56,5 @@ position = Vector2(95, 129)
 [node name="EnergyBig" parent="." instance=ExtResource("14_adgv3")]
 
 [node name="EnergyLt" parent="." instance=ExtResource("15_08cn5")]
+
+[node name="TestManStage" parent="." instance=ExtResource("16_5nq7k")]

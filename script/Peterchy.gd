@@ -16,7 +16,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$Label.text = str($ChangeDirectionTimer.time_left)
+	#$Label.text = str($ChangeDirectionTimer.time_left)
 	#Defeating
 	if health == 0:
 		destroyied()

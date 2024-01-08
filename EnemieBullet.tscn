@@ -16,6 +16,7 @@ texture = ExtResource("2_oqa5h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_pd7ab")
+debug_color = Color(0.823127, 0.321772, 0.613859, 0.42)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(2.38419e-07, 2.38419e-07)

@@ -34,7 +34,7 @@ func _physics_process(delta):
 	#$Label.text = str()
 
 #Animations
- 
+ #Replace all with a state machine
 	if is_taking_damage == true:
 		$Sprite/AnimationPlayer.play("damage")
 	else:
@@ -56,6 +56,11 @@ func _physics_process(delta):
 				$Sprite/AnimationPlayer.play("shoot_idle")
 			if not is_on_floor():
 				$Sprite/AnimationPlayer.play("shoot_jump")
+		if is_sliding == true:
+			$Sprite/AnimationPlayer.play("Slide")
+			WALK_SPEED = 120
+			$Collision.disabled = true
+			$SlidingColl.disabled = false
 	
 #	#Physics
 	# Add the gravity.
@@ -100,8 +105,14 @@ func _physics_process(delta):
 	velocity.x = target_speed 
 
 
+# Slide WIP
+	if Input.is_action_pressed("jump") and Input.is_action_pressed("down"):
+		is_sliding = true
+		print("slide")
+		$SlidingTimer.start()
+
 	# Jump
-	if cannot_move == false:
+	if is_sliding == false and cannot_move == false:
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			is_onair = true
 			is_rising = true
@@ -112,14 +123,9 @@ func _physics_process(delta):
 			velocity.y = 0
 			is_rising = false
 		
-		
-		# Slide WIP
-		if Input.is_action_pressed("jump") and Input.is_action_pressed("down"):
-			is_sliding = true
-			print("slide")
-		
+			
 		#SHOOT
-		if Input.is_action_just_pressed("shoot"):
+		if is_sliding == false and Input.is_action_just_pressed("shoot"):
 			is_launching_normal_attack = true
 			attacktimer.start() #add timer to the flag, after this time animations turns in non attacking
 			var projectile_pos = $Shootpos.global_position
@@ -174,16 +180,16 @@ func splash():
 func death():
 	is_invincible = true
 	$Sprite.hide()
+	Audio.playsfx2(defeatsfx)
 	var piupiu = preload("res://MM_Explosion.tscn")
 	var p = piupiu.instantiate()
 	get_parent().add_child(p)
 	cannot_move = true
 	collision_layer = 0
 	$Collision.disabled = 1
-	Audio.playsfx(defeatsfx)
-	print("ciao")
+	$SlidingColl.disabled = 1
 	await get_tree().create_timer(3.0).timeout
-	get_tree().change_scene_to_file("res://IceManStage.tscn")
+	get_tree().change_scene_to_file("res://test_man_stage.tscn")
 	Global.reset_vars()
 	
 #Damage
@@ -212,3 +218,9 @@ func _on_bubble_timeout():
 	if under_water == true:
 		Effect_manager.bubble()
 		$Bubble.start()
+
+func _on_sliding_timer_timeout():
+	is_sliding = false
+	WALK_SPEED = 82.5
+	$Collision.disabled = false
+	$SlidingColl.disabled = true

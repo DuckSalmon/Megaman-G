@@ -87,7 +87,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qt2l5"]
-size = Vector2(30, 30)
+size = Vector2(26, 26)
 
 [node name="Peterchy" type="CharacterBody2D"]
 collision_layer = 0
@@ -95,10 +95,11 @@ script = ExtResource("1_ol56o")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_rngw6")
+debug_color = Color(6.73831e-07, 0.6013, 0.692449, 0.42)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2ivsl")
-frame_progress = 0.363435
+frame_progress = 0.660521
 
 [node name="HitAnim" type="AnimationPlayer" parent="Sprite"]
 libraries = {
@@ -119,6 +120,7 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_qt2l5")
+debug_color = Color(0.951144, 0.0185715, 0.55594, 0.42)
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0

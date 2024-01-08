@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://script/Pit.gd" id="1_lh0rb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_67fjr"]
-size = Vector2(100, 16)
+size = Vector2(100, 14)
 
 [node name="Pit" type="Area2D"]
 collision_layer = 0
@@ -11,6 +11,7 @@ collision_mask = 2
 script = ExtResource("1_lh0rb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 0)
 shape = SubResource("RectangleShape2D_67fjr")
 debug_color = Color(0.964706, 0, 0.0784314, 0.419608)
 metadata/_edit_lock_ = true

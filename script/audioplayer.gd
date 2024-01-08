@@ -2,7 +2,7 @@ extends Node
 
 @onready var dmgsfx = preload("res://assets/AUDIO/SFX/EnemieHit.wav")
 @onready var reflectsfx = preload("res://assets/AUDIO/SFX/Reflect.wav")
-
+@onready var defeatsfx = preload("res://assets/AUDIO/SFX/MegamanDefeat.wav")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass

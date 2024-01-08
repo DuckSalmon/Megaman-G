@@ -42,6 +42,7 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-5, 0)
 shape = SubResource("RectangleShape2D_0lsi4")
+debug_color = Color(0.962072, 1.44392e-06, 0.506698, 0.42)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, -2.38419e-07)

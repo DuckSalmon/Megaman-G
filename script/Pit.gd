@@ -1,4 +1,5 @@
 extends Area2D
+#tool 
 
 signal ops  #U fallen in a pit or on some spikes
 # Called when the node enters the scene tree for the first time.
