@@ -1,7 +1,8 @@
-res://Scenes/Enemies
+res://script/States
 res://
-res://assets/GFX/Effects
 res://script
+res://Scenes/Enemies
+res://assets/GFX/Effects
 res://assets/GFX/Enemies
 res://assets/AUDIO/SFX
 res://assets/AUDIO/BGM

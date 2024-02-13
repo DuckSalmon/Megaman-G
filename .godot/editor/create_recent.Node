@@ -1,14 +1,14 @@
 Label
+StaticBody2D
+Node
 CollisionShape2D
+Area2D
 Timer
 Camera2D
 TileMap
 Marker2D
 AnimationPlayer
-Area2D
 AnimatedSprite2D
 CharacterBody2D
 RigidBody2D
-StaticBody2D
 VisibleOnScreenNotifier2D
-Sprite2D

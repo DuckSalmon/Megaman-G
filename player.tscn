@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://bq6mgekl3uhqd"]
+[gd_scene load_steps=25 format=3 uid="uid://bq6mgekl3uhqd"]
 
 [ext_resource type="Script" path="res://script/Player.gd" id="1_4075b"]
 [ext_resource type="Texture2D" uid="uid://b2r0mvkhsp544" path="res://assets/GFX/player/MegaMan.png" id="3_nj304"]
 [ext_resource type="Texture2D" uid="uid://edx0ys707ioi" path="res://assets/GFX/Effects/hit.png" id="3_wyc4v"]
+[ext_resource type="Script" path="res://script/States/State.gd" id="4_cfbgu"]
 
 [sub_resource type="Animation" id="Animation_hpw50"]
 resource_name = "Idle"
@@ -310,10 +311,6 @@ position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_yy37y")
 disabled = true
 
-[node name="Shootanimtimer" type="Timer" parent="."]
-wait_time = 0.25
-one_shot = true
-
 [node name="Shootpos" type="Marker2D" parent="."]
 position = Vector2(13, 3)
 
@@ -342,15 +339,19 @@ libraries = {
 offset_top = -32.0
 offset_right = 40.0
 offset_bottom = -9.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 1, 0, 1)
 
 [node name="Invincibility" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
 [node name="SlidingTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
 
-[connection signal="timeout" from="Shootanimtimer" to="." method="_on_shootanimtimer_timeout"]
+[node name="State" type="Node" parent="."]
+script = ExtResource("4_cfbgu")
+
 [connection signal="body_entered" from="waterdetect" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="waterdetect" to="." method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="Bubble" to="." method="_on_bubble_timeout"]

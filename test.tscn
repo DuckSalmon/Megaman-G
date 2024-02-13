@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbddpmpu2og02"]
+
+[ext_resource type="PackedScene" uid="uid://bq6mgekl3uhqd" path="res://player.tscn" id="1_5mu6u"]
+[ext_resource type="PackedScene" uid="uid://gay0l55hi0ur" path="res://Pit.tscn" id="2_syt2r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2kdnt"]
+size = Vector2(482, 20)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_5mu6u")]
+position = Vector2(121, 47)
+
+[node name="Label2" type="Label" parent="Player"]
+offset_left = 22.0
+offset_top = -39.0
+offset_right = 62.0
+offset_bottom = -16.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(200, 200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_2kdnt")
+
+[node name="Pit" parent="." instance=ExtResource("2_syt2r")]
+position = Vector2(295, 186)
