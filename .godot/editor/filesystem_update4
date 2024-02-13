@@ -3,8 +3,4 @@ res://script/met_dx.gd
 res://assets/GFX/pal.gdshader
 res://player.tscn
 res://test_man_stage.tscn
-res://script/States/Idle.gd
-res://script/Player.gd
-res://script/States/Onair.gd
 res://MegaBuster.tscn
-res://script/States/Walking.gd
